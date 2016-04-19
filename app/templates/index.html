@@ -1,0 +1,164 @@
+{% extends "layout.html" %}
+{% block body %}
+<nav class="navbar navbar-default" style="margin-bottom:3px;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-search-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">{{ _("Osaka University Course Searching Engine") }}</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-search-collapse">
+      <form class="navbar-form navbar-left" role="search" id="search-course">
+        <div class="form-group" style="display:inline;">
+          <div class="input-group search" style="display:table;">
+            <input type="text" class="form-control" placeholder="{{ _("Search") }}" id="coursename">
+            <span class="input-group-btn" style="display:table-cell;width:7%;">
+              <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ _("Link") }} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a target="_blank" href="https://koan.osaka-u.ac.jp/syllabus_ex/campus?func=function.syllabus.ex.refer.sogo.input">全学シラバス</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a target="_blank" href="https://koan.osaka-u.ac.jp">KOAN</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div id="lecture">
+  <!-- Nav tabs -->
+  <ul class="nav nav-pills" role="tablist" style="padding-bottom:3px;">
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+  </div>
+</div>
+
+<div class="hide" id="template">
+  <div class="nav-tab-content-table">
+    <table class="table">
+      <thead>
+        <tr class="info">
+          <th></th>
+          <th>{{ _("Class Code") }}</th>
+          <th>{{ _("Name") }}</th>
+          <th>{{ _("Instructor") }}</th>
+          <th>{{ _("Day and Period") }}</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      <tfoot class="hide">
+        <tr>
+          <td class="link">
+            <a href="#" target="_blank"><span class="glyphicon glyphicon-link"></span></a>
+          </td>
+          <td class="ClassCode"></td>
+          <td class="Name"></td>
+          <td class="Instructor"></td>
+          <td class="DayAndPeriod"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<script>
+Array.prototype.unique = function() {
+    var a = [];
+    for (var i=0, l=this.length; i<l; i++)
+        if (a.indexOf(this[i]) === -1)
+            a.push(this[i]);
+    return a;
+}
+
+var render_course = function($dom, data) {
+  var $table = $("div#template div.nav-tab-content-table table").clone();
+  $.each(data, function(i, v) {
+    var $tr = $table.find("tfoot tr").clone();
+
+    // var href = v['InfoURL'].replace(/syllabus/g, "syllabus.ex")
+    //                        .replace("koan", "syllabus_ex")
+    //                        .replace(/^/, "https://koan.osaka-u.ac.jp");
+    var href = v['InfoURL'].replace(/^/, "https://koan.osaka-u.ac.jp");
+
+    $("td.link a", $tr).attr("href", href);
+    $("td.ClassCode", $tr).text(v['ClassCode']);
+    $("td.Name", $tr).html(v['Name'] + "<br>" + v['Name_English']);
+    $("td.Instructor", $tr).html(v['Instructor'].replace(/／/g, '<br>'));
+    $("td.DayAndPeriod", $tr).html(v['DayAndPeriod'].replace(/／/g, '<br>'));
+    $("tbody", $table).append($tr);
+  });
+  console.log($table);
+  $dom.html($table);
+}
+
+$("#search-course").on('submit', function(e){
+  e.preventDefault();
+  jQuery.get("/course", {
+    query: $(".search input#coursename").val()
+  }, function (data) {
+    console.log(data);
+
+    var $tabs = $("div#lecture > ul.nav-pills"),
+        $content = $("div#lecture > div.tab-content");
+
+    $tabs.html('');
+    $content.html('');
+
+    var courses = {};
+    $.each(data.courses, function(i, v) {
+      if (!(v['Category'] in courses))
+        courses[v['Category']] = [];
+      courses[v['Category']].push(v);
+    });
+
+    $.each(Object.keys(courses), function(i, v) {
+      var name = v.replace(/[(]/g, '（').replace(/[)]/g, '）');
+      var count = courses[v].length;
+      var $a = $('<a href="#' + name + '" aria-controls="' + name + '" role="tab" data-toggle="tab">' + name + ' (' + count + ')' + '</a>'),
+          $li = $('<li role="presentation"></li>').append($a),
+          $div = $('<div role="tabpanel" class="tab-pane" id="' + name + '"></div>');
+      $tabs.append($li);
+      $content.append($div);
+      render_course($div, courses[v]);
+    });
+
+    var $div = $('<div role="tabpanel" class="tab-pane in active" id="all"></div>');
+    render_course($div, data.courses);
+
+    $tabs.prepend('<li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">{{ _("All") }} ('+data.courses.length+')</a></li>');
+    $content.prepend($div);
+    $("a#all", $tabs).tab('');
+  });
+});
+
+$("div.search input#coursename").autocomplete({
+  source: function (request, response) {
+    jQuery.get("/autocomplete/course", {
+      query: request.term
+    }, function (data) {
+      console.log(data);
+      response($.map(data.result, function(v){ return v; }));
+    });
+  },
+  minLength: 1
+});
+</script>
+
+{% endblock %}
