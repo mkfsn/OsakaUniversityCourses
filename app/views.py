@@ -4,10 +4,12 @@ __date__ = ' 4 10, 2016 '
 __author__ = 'mkfsn'
 
 
+import re
 from flask import render_template
 from flask import jsonify
 from flask import request
-import re
+from sqlalchemy.sql import func
+from sqlalchemy.sql import label
 
 
 from app import app, db
@@ -31,6 +33,15 @@ def index():
 def autocomplete_course():
     query = request.args.get('query').strip().rstrip()
     return jsonify(result=Course.distinct(query))
+
+
+@app.route('/chart', methods=['GET'])
+def chart():
+    import json
+    data = db.session.query(Course.ClassAffiliation,
+                            label('Count', func.count(Course.ClassCode))) \
+                     .group_by(Course.ClassAffiliation).all()
+    return render_template('chart.html', data=json.dumps(data))
 
 
 def parse_query(query):

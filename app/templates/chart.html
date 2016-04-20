@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block head %}
+<script src="{{ url_for('static', filename='js/highcharts.js') }}"></script>
+{% endblock %}
+{% block body %}
+
+<div id="chart" class="chart" style="height: 1000px; width: 1000px; margin:0 auto"></div>
+<script>
+var raw = {{ data|safe }};
+$(function(){
+  var data = jQuery.map(raw, function(v){
+    return {'name': v[0], 'y': v[1]};
+  });
+  console.log(data);
+  $("#chart").highcharts({
+    chart: {
+      margin: [20, 0, 500, 0],
+      spacingTop: 0,
+      spacingBottom: 0,
+      spacingLeft: 0,
+      spacingRight: 0,
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Osaka University Course, 2016'
+    },
+    tooltip: {
+      pointFormat: '#<b>{point.y:,.0f}</b>'
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        size: '100%',
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: false,
+        },
+        showInLegend: true
+      }
+    },
+    series: [{
+      name: 'Course',
+      colorByPoint: true,
+      data: $.map(raw, function(v){ return {'name': v[0], 'y': v[1]}; }),
+    }]
+  });
+});
+
+</script>
+{% endblock %}
