@@ -81,8 +81,8 @@ def course():
     app.logger.info("Filtered: [%s]" % filtered)
     app.logger.info("Specified: [%s]" % specified)
     if query == "" and \
-            sum([len(i) for i in filtered]) == 0 and \
-            sum([len(i) for i in specified] == 0):
+            sum([len(v) for k, v in filtered.items()]) == 0 and \
+            sum([len(v) for k, v in specified.items()]) == 0:
         return jsonify(courses=[])
 
     conditions = (
