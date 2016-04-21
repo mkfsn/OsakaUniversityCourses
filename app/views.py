@@ -70,7 +70,13 @@ def parse_query(query):
                 specified[keyword].append(matched[1])
             query = re.sub(pattern, '', query)
 
-    return query.strip().rstrip(), filtered, specified
+    query = query.strip().rstrip()
+    formatted_query = []
+    for matched in re.findall(r'(?:[\'"].+?[\'"])', query):
+        formatted_query.append(matched[1:-1])
+        query = re.sub(matched, '', query)
+    formatted_query += [i for i in query.split(' ') if i != '']
+    return formatted_query, filtered, specified
 
 
 @app.route('/course', methods=['GET'])
@@ -85,12 +91,14 @@ def course():
             sum([len(v) for k, v in specified.items()]) == 0:
         return jsonify(courses=[])
 
-    conditions = (
-        (Course.ClassCode == query) |
-        Course.Name.contains(query) |
-        Course.Name_English.contains(query) |
-        Course.Instructor.contains(query)
-    )
+    conditions = (Course.Id == Course.Id)
+    for q in query:
+        conditions &= (
+            (Course.ClassCode == q) |
+            Course.Name.contains(q) |
+            Course.Name_English.contains(q) |
+            Course.Instructor.contains(q)
+        )
 
     # TODO: filter title, interval
     for s in filtered['interval']:
