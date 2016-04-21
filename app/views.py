@@ -83,9 +83,9 @@ def parse_query(query):
 def course():
     query = request.args.get('query')
     query, filtered, specified = parse_query(query)
-    app.logger.info("Query: [%s]" % query)
-    app.logger.info("Filtered: [%s]" % filtered)
-    app.logger.info("Specified: [%s]" % specified)
+    app.logger.info("Query: %s" % query)
+    app.logger.info("Filtered: %s" % filtered)
+    app.logger.info("Specified: %s" % specified)
     if query == "" and \
             sum([len(v) for k, v in filtered.items()]) == 0 and \
             sum([len(v) for k, v in specified.items()]) == 0:
