@@ -10,6 +10,7 @@ from flask import jsonify
 from flask import request
 from sqlalchemy.sql import func
 from sqlalchemy.sql import label
+from sqlalchemy.sql.expression import or_
 
 
 from app import app, db
@@ -52,8 +53,8 @@ def parse_query(query):
         'period': "(\d+)",
         'interval': ('('
                      '(?:' + '|'.join(['(?:%s)' % i for i in dayofweek]) + ')'
-                     '\d'
-                     '(?:(?:..\d)|(?:(?:,\d)*))'
+                     '\d+'
+                     '(?:(?:..\d+)|(?:(?:,\d+)*))'
                      ')'),
         'instructor': '((?:[^\s\'"]+)|(?:[\'"].+?[\'"]))'
     }
@@ -79,6 +80,24 @@ def parse_query(query):
     return formatted_query, filtered, specified
 
 
+def parse_interval(day, periods):
+    dayofweek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+    if periods.find("..") != -1:
+        start, end = [int(i) for i in periods.split("..", 1)]
+        if start > end:
+            start, end = [end, start]
+        if start < 1:
+            start = 1
+        if end > 12:
+            end = 12
+        plist = range(start, end + 1)
+    elif periods.find(",") != -1:
+        plist = [int(i) for i in set(periods.split(",")) if 0 < int(i) < 13]
+    else:
+        plist = [int(periods)]
+    return [dayofweek.index(day.lower()) + 1, plist]
+
+
 @app.route('/course', methods=['GET'])
 def course():
     query = request.args.get('query')
@@ -100,9 +119,24 @@ def course():
             Course.Instructor.contains(q)
         )
 
-    # TODO: filter title, interval
+    # TODO: filter title
+    for s in specified['interval']:
+        day, periods = parse_interval(s[:3], s[3:])
+        app.logger.info('%s %s' % (day, periods))
+        condition = []
+        for p in periods:
+            condition.append(Course.ClassTime.any(Time.Day == day) &
+                             Course.ClassTime.any(Time.Period == p))
+        conditions &= or_(*condition)
+
     for s in filtered['interval']:
-        app.logger.info(s)
+        day, periods = parse_interval(s[:3], s[3:])
+        app.logger.info('%s %s' % (day, periods))
+        condition = []
+        for p in periods:
+            condition.append(~(Course.ClassTime.any(Time.Day == day) &
+                               Course.ClassTime.any(Time.Period == p)))
+        conditions &= or_(*condition)
 
     for s in specified['instructor']:
         _name = re.sub(r'^"|"$', '', s)
@@ -123,7 +157,7 @@ def course():
 
     for s in filtered['period']:
         conditions &= ~(Course.ClassTime.any(Time.Period == int(s)))
- 
+
     courses = Course.query.join(Time).filter(conditions).all()
     return jsonify(courses=[c.to_dict() for c in courses])
 
