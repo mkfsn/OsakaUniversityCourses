@@ -30,7 +30,7 @@ Starting web server
 $ ./manage.py runserver
 ```
 
-+ Then open web browser to access
+And then open web browser to access
 
 ```
 https://localhost:5001/
