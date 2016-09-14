@@ -106,7 +106,7 @@ def dump_syllabus(headers, payload, department_list, db):
     link = 'https://koan.osaka-u.ac.jp/syllabus_ex/campus'
     headers['Referer'] = 'https://koan.osaka-u.ac.jp/syllabus_ex/campus'
     payload['func'] = 'function.syllabus.ex.refer.sogo.search'
-    
+
     for category, affiliation in department_list.items():
         for a in affiliation:
 
@@ -132,7 +132,7 @@ def dump_syllabus(headers, payload, department_list, db):
                     db.session.add(t)
             db.session.commit()
 
-            # Don't fetch too fast 
+            # Don't fetch too fast
             time.sleep(2)
 
 
