@@ -5,8 +5,8 @@ __author__ = 'mkfsn'
 
 
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.babel import Babel
+from flask_sqlalchemy import SQLAlchemy
+from flask_babel import Babel
 
 
 app = Flask(__name__)
