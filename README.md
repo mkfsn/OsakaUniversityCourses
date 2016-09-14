@@ -8,7 +8,7 @@ OsakaUniversityCourses is a web application for searching courses in a wiser way
 
 # Installation
 
-+ Install required packages.
+Install required packages.
 
 ```
 pip -r requirement.txt
@@ -16,7 +16,7 @@ pip -r requirement.txt
 
 # Preparation
 
-+ Fetch the latest information of courses
+Fetch the latest information of courses
 
 ```
 $ ./fetch_courses.py
@@ -24,7 +24,7 @@ $ ./fetch_courses.py
 
 # Start web application
 
-+ Starting web server
+Starting web server
 
 ```
 $ ./manage.py runserver
@@ -38,13 +38,13 @@ https://localhost:5001/
 
 # How to use
 
-+ Type any keywords in input field on the top of page. There are some reserved keyowords:
+Type any keywords in input field on the top of page. There are some reserved keyowords:
 
     * day
     * period
     * interval
 
-+ Here are some examples:
+Here are some examples:
 
     * `"Computer" -day:1`: Courses that name has "Computer" and not in Monday.
     * `"Computer" -period:5`: Courses that name has "Computer" and not in period 5
