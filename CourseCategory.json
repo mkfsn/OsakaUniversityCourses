@@ -1,0 +1,218 @@
+{
+    "kyotsu": [
+        {
+            "Code": "", 
+            "Name": "\u5171\u901a\u6559\u80b2\u79d1\u76ee"
+        }
+    ], 
+    "kyoshoku": [
+        {
+            "Code": "", 
+            "Name": "\u6559\u8077\u79d1\u76ee"
+        }
+    ], 
+    "gakusai": [
+        {
+            "Code": "", 
+            "Name": "\u5b66\u969b\u878d\u5408\u6559\u80b2\u79d1\u76ee"
+        }
+    ], 
+    "kokusai": [
+        {
+            "Code": "", 
+            "Name": "\u56fd\u969b\u4ea4\u6d41\u79d1\u76ee"
+        }
+    ], 
+    "senmon": [
+        {
+            "Code": "00", 
+            "Name": "\u6587\u5b66\u90e8"
+        }, 
+        {
+            "Code": "01", 
+            "Name": "\u4eba\u9593\u79d1\u5b66\u90e8"
+        }, 
+        {
+            "Code": "02", 
+            "Name": "\u6cd5\u5b66\u90e8"
+        }, 
+        {
+            "Code": "03", 
+            "Name": "\u7d4c\u6e08\u5b66\u90e8"
+        }, 
+        {
+            "Code": "04", 
+            "Name": "\u7406\u5b66\u90e8"
+        }, 
+        {
+            "Code": "05", 
+            "Name": "\u533b\u5b66\u90e8\uff08\u533b\uff09"
+        }, 
+        {
+            "Code": "0A", 
+            "Name": "\u533b\u5b66\u90e8\uff08\u4fdd\uff09"
+        }, 
+        {
+            "Code": "06", 
+            "Name": "\u6b6f\u5b66\u90e8"
+        }, 
+        {
+            "Code": "07", 
+            "Name": "\u85ac\u5b66\u90e8"
+        }, 
+        {
+            "Code": "08", 
+            "Name": "\u5de5\u5b66\u90e8"
+        }, 
+        {
+            "Code": "09", 
+            "Name": "\u57fa\u790e\u5de5\u5b66\u90e8"
+        }, 
+        {
+            "Code": "10", 
+            "Name": "\u5916\u56fd\u8a9e\u5b66\u90e8"
+        }, 
+        {
+            "Code": "13", 
+            "Name": "\u5168\u5b66\u6559\u80b2\u63a8\u9032\u6a5f\u69cb"
+        }, 
+        {
+            "Code": "20", 
+            "Name": "\u6587\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "21", 
+            "Name": "\u4eba\u9593\u79d1\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "22", 
+            "Name": "\u6cd5\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "23", 
+            "Name": "\u7d4c\u6e08\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "24", 
+            "Name": "\u7406\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "25", 
+            "Name": "\u533b\u5b66\u7cfb\u7814\u7a76\u79d1\uff08\u533b\uff09"
+        }, 
+        {
+            "Code": "2A", 
+            "Name": "\u533b\u5b66\u7cfb\u7814\u7a76\u79d1\uff08\u4fdd\uff09"
+        }, 
+        {
+            "Code": "26", 
+            "Name": "\u6b6f\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "27", 
+            "Name": "\u85ac\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "28", 
+            "Name": "\u5de5\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "29", 
+            "Name": "\u57fa\u790e\u5de5\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "30", 
+            "Name": "\u8a00\u8a9e\u6587\u5316\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "31", 
+            "Name": "\u56fd\u969b\u516c\u5171\u653f\u7b56\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "32", 
+            "Name": "\u751f\u547d\u6a5f\u80fd\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "33", 
+            "Name": "\u60c5\u5831\u79d1\u5b66\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "34", 
+            "Name": "\u9ad8\u7b49\u53f8\u6cd5\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "38", 
+            "Name": "\u8a00\u8a9e\u793e\u4f1a\u7814\u7a76\u79d1"
+        }, 
+        {
+            "Code": "39", 
+            "Name": "\u65e5\u672c\u8a9e\u65e5\u672c\u6587\u5316\u6559\u80b2\u30bb\u30f3\u30bf\u30fc"
+        }, 
+        {
+            "Code": "36", 
+            "Name": "\uff7a\uff90\uff6d\uff86\uff79\uff70\uff7c\uff6e\uff9d\uff83\uff9e\uff7b\uff9e\uff72\uff9d\uff65\uff7e\uff9d\uff80\uff70"
+        }, 
+        {
+            "Code": "Y1", 
+            "Name": "\u5927\u5b66\u5171\u901a"
+        }, 
+        {
+            "Code": "62", 
+            "Name": "\u30d9\u30f3\u30c1\u30e3\u30fc\u30fb\u30d3\u30b8\u30cd\u30b9\u30fb\u30e9\u30dc\u30e9\u30c8\u30ea\u30fc"
+        }, 
+        {
+            "Code": "64", 
+            "Name": "\u30b5\u30a4\u30d0\u30fc\u30e1\u30c7\u30a3\u30a2\u30bb\u30f3\u30bf\u30fc"
+        }, 
+        {
+            "Code": "72", 
+            "Name": "\u30b0\u30ed\u30fc\u30d0\u30eb\u30b3\u30e9\u30dc\u30ec\u30fc\u30b7\u30e7\u30f3\u30bb\u30f3\u30bf\u30fc"
+        }, 
+        {
+            "Code": "Y6", 
+            "Name": "\u6559\u8077\u79d1\u76ee"
+        }, 
+        {
+            "Code": "77", 
+            "Name": "\u9023\u5408\u5c0f\u5150\u767a\u9054\u5b66\u7814\u7a76\u79d1(2011\u5e74\u5ea6\u5165\u5b66\u4ee5\u524d)"
+        }, 
+        {
+            "Code": "7A", 
+            "Name": "\u9023\u5408\u5c0f\u5150\u767a\u9054\u5b66\u7814\u7a76\u79d1(2012\u5e74\u5ea6\u5165\u5b66\u4ee5\u964d)"
+        }, 
+        {
+            "Code": "88", 
+            "Name": "\u56fd\u969b\u6559\u80b2\u4ea4\u6d41\u30bb\u30f3\u30bf\u30fc"
+        }, 
+        {
+            "Code": "Z2", 
+            "Name": "\u5b66\u90e8\u82f1\u8a9e\u30b3\u30fc\u30b9"
+        }, 
+        {
+            "Code": "97", 
+            "Name": "\u672a\u6765\u6226\u7565\u6a5f\u69cb"
+        }, 
+        {
+            "Code": "C5", 
+            "Name": "\u5168\u5b66\u6559\u80b2\u63a8\u9032\u6a5f\u69cb(\u5927\u5b66\u9662)"
+        }
+    ], 
+    "global": [
+        {
+            "Code": "", 
+            "Name": "\u30b0\u30ed\u30fc\u30d0\u30eb\u30b3\u30e9\u30dc\u30ec\u30fc\u30b7\u30e7\u30f3\u79d1\u76ee"
+        }
+    ], 
+    "communi": [
+        {
+            "Code": "", 
+            "Name": "\u30b3\u30df\u30e5\u30cb\u30b1\u30fc\u30b7\u30e7\u30f3\u30c7\u30b6\u30a4\u30f3\u79d1\u76ee"
+        }
+    ], 
+    "gymnas": [
+        {
+            "Code": "", 
+            "Name": "\u77e5\u306e\u30b8\u30e0\u30ca\u30b9\u30c6\u30a3\u30c3\u30af\u30b9\u79d1\u76ee"
+        }
+    ]
+}
