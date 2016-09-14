@@ -1,5 +1,7 @@
 # OsakaUniversityCourses
 
+OsakaUniversityCourses is a web application for searching courses in a wiser way.
+
 # Dependency
 
 + python-pip
