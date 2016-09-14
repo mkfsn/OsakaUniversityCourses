@@ -40,15 +40,15 @@ https://localhost:5001/
 
 Type any keywords in input field on the top of page. There are some reserved keyowords:
 
-    * day
-    * period
-    * interval
+* day
+* period
+* interval
 
 Here are some examples:
 
-    * `"Computer" -day:1`: Courses that name has "Computer" and not in Monday.
-    * `"Computer" -period:5`: Courses that name has "Computer" and not in period 5
-    * `Computer day:2`: Courses that name has "Computer" and in Tuesday.
+* `"Computer" -day:1`: Courses that name has "Computer" and not in Monday.
+* `"Computer" -period:5`: Courses that name has "Computer" and not in period 5
+* `Computer day:2`: Courses that name has "Computer" and in Tuesday.
 
 # Screenshots
 
