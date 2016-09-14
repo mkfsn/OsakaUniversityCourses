@@ -1,20 +1,28 @@
 # OsakaUniversityCourses
 
-# Prepare
+# Dependency
 
-+ Ensure that you have already installed `python-pip`
++ python-pip
+
+# Installation
+
++ Install required packages.
+
+```
+pip -r requirement.txt
+```
+
+# Preparation
 
 + Fetch the latest information of courses
 
 ```
-$ pip -r requirement.txt
 $ ./fetch_courses.py
 ```
 
 # Start web application
 
-
-+ Run web server
++ Starting web server
 
 ```
 $ ./manage.py runserver
