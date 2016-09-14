@@ -38,7 +38,9 @@ https://localhost:5001/
 
 # How to use
 
-Type any keywords in input field on the top of page. There are some reserved keyowords:
+Type any keyword in input field on the top of page.
+
+There are some reserved keyowords:
 
 * day
 * period
