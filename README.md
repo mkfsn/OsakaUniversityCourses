@@ -45,12 +45,30 @@ There are some reserved keyowords:
 * day
 * period
 * interval
+* instructor
 
 Here are some examples:
 
-* `"Computer" -day:1`: Courses that name has "Computer" and not in Monday.
-* `"Computer" -period:5`: Courses that name has "Computer" and not in period 5
-* `Computer day:2`: Courses that name has "Computer" and in Tuesday.
+* Courses that name contains "Computer" but not in Monday and Friday.
+
+    `"Computer" -day:1 -day:5`
+
+* Courses that name contains "Computer" and is in period 5
+
+    `"Computer" period:5`
+
+* Courses that name contains "Computer" and is in Monday period 2 to 5.
+
+    `Computer interval:mon2..5`
+
+* Courses that name contains "Computer" but not in Friday period 1, 3 and 5.
+
+    `Computer -interval:fri1,3 -interval:fri5`
+
+* Courses that name contains "Computer" and the name of instructor contains "SUGIHARA".
+
+    `Computer instructor:SUGIHARA`
+
 
 # Screenshots
 
