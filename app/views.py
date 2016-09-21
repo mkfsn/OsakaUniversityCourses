@@ -121,6 +121,8 @@ def course():
 
     # TODO: filter title
     for s in specified['interval']:
+        # Example of format of s: "fri1,5", so fetch first three characters as
+        # day, and the remains are periods
         day, periods = parse_interval(s[:3], s[3:])
         app.logger.info('%s %s' % (day, periods))
         condition = []
@@ -130,6 +132,8 @@ def course():
         conditions &= or_(*condition)
 
     for s in filtered['interval']:
+        # Example of format of s: "fri1,5", so fetch first three characters as
+        # day, and the remains are periods
         day, periods = parse_interval(s[:3], s[3:])
         app.logger.info('%s %s' % (day, periods))
         condition = []
