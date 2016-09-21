@@ -112,10 +112,19 @@ $("#search-course").on('submit', function(e){
   e.preventDefault();
   var $tabs = $("div#lecture > ul.nav-pills"),
       $content = $("div#lecture > div.tab-content");
+  var queryStr = $.trim($(".search input#coursename").val());
+  
+  // Confirm if sure to continue.
+  if (queryStr == "") {
+    res = confirm("You are asking all of records (about 8000), continue?");
+    if (res !== true)
+      return false;
+  }
+
   $.ajax({
     url: '/course',
     method: 'GET',
-    data: {query: $(".search input#coursename").val()},
+    data: {query: queryStr},
     beforeSend:function(){
       $tabs.css('opacity', '0.5');
       $content.css('opacity', '0.5');
