@@ -116,7 +116,7 @@ $("#search-course").on('submit', function(e){
   
   // Confirm if sure to continue.
   if (queryStr == "") {
-    res = confirm("You are asking all of records (about 8000)" + \
+    res = confirm("You are asking all of records (about 8000)" +
                   ", and may cause your browser crash, continue?");
     if (res !== true)
       return false;
