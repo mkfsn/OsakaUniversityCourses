@@ -4,7 +4,6 @@ __date__ = ' 5 21, 2016 '
 __author__ = 'mkfsn'
 
 from app import app, db
-from app.models import Course
 from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
 
