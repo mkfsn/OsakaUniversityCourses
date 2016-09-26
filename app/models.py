@@ -73,7 +73,7 @@ class Course(db.Model):
         return code + name + name_english + instructor
 
     @classmethod
-    def years(self, attr):
+    def years(self):
         query = db.session.query(self.__getattribute__(self, "Year")) \
                   .distinct().all()
         return [c.__getattribute__("Year") for c in query]
