@@ -20,38 +20,59 @@ db.create_all()
 db.session.commit()
 
 
+"""
+Extract the day and period from @content.
+- @content(str): Examples are as following
+        * 水 2限
+        * 水 5限,6限
+        * Wednesday, Period 2
+        * Wednesday, Period 5,Period 6
+"""
 def extract_day_period(content):
     day_of_week = {
         'jp': ['月', '火', '水', '木', '金', '土', '日'],
         'en': ['monday', 'tuesday', 'wednesday', 'thursday',
                'friday', 'saturday', 'sunday']
     }
+
     pattern = {
         'jp': '|'.join(['(%s)' % c for c in day_of_week['jp']]),
         'en': '|'.join(['(%s)' % c for c in day_of_week['en']])
     }
+
     match = {
         'jp': re.search(pattern['jp'], content),
         'en': re.search(pattern['en'], content, flags=re.IGNORECASE)
     }
+
+    # If @content are in Japanese
     if match['jp'] is not None:
+
         m = match['jp'].group(0)
         content = re.sub('(%s)|(%s)' % (m, '限'), '', content)
         day = 1 + day_of_week['jp'].index(m)
         return [(day, int(i)) for i in re.findall("\d+", content)]
+
+    # If @content are in Englist
     elif match['en'] is not None:
+
         m = match['en'].group(0).lower()
         content = re.sub('(%s)|(%s)' % (m, 'Period'), '', content,
                          flags=re.IGNORECASE)
         day = 1 + day_of_week['en'].index(m)
         return [(day, int(i)) for i in re.findall("\d+", content)]
+
+    # Unknown
     else:
         return [(-1, -1)]
 
 
 def decode_day_period(jp, en):
+
+    # If the time of course are in different days
     if jp.find('　') != -1 and en.find('　') != -1:
-        # 水 2限　木 2限 | Wednesday, Period 2　Thursday, Period 2
+        # @jp: 水 2限　木 2限
+        # @en: Wednesday, Period 2　Thursday, Period 2
         jp_list, en_list = [jp.split('　'), en.split('　')]
         if len(jp_list) == len(en_list):
             day_period = []
@@ -59,10 +80,11 @@ def decode_day_period(jp, en):
                 day_period += decode_day_period(jp_list[i], en_list[i])
             return day_period
 
+    # If the time of course in one day has one or more period
     elif (len(jp) == 8 and len(en) >= 16 and len(en) <= 19) or \
          (jp.count(',') > 0 and en.count(',') > 1):
-        # 水 5限 | Wednesday, Period 5
-        # 水 5限,6限 | Wednesday, Period 5,Period 6
+        # @jp: 水 5限,6限
+        # @en: Wednesday, Period 5,Period 6
         t = [extract_day_period(jp), extract_day_period(en)]
         if t[0] == t[1]:
             return t[0]
@@ -70,6 +92,7 @@ def decode_day_period(jp, en):
     elif len(jp) == 3 and len(en) == 5:
         return [(0, 0)]
 
+    # Unknown
     return [(-1, -1)]
 
 
