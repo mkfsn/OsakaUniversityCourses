@@ -18,7 +18,7 @@ babel = Babel(app)
 from app import views, models
 
 
-LOGFILE = 'tmp/OsakaUniversityCourses.log'
+LOGFILE = 'log/OsakaUniversityCourses.log'
 LOGFORMAT = '%(asctime)s %(levelname)s: %(message)s [%(pathname)s:%(lineno)d]'
 
 
