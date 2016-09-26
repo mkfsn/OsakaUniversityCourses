@@ -36,6 +36,11 @@ def autocomplete_course():
     return jsonify(result=Course.distinct(query))
 
 
+@app.route('/ajax/years', methods=['GET'])
+def ajax_years():
+    return jsonify(result=Course.years())
+
+
 @app.route('/chart', methods=['GET'])
 def chart():
     import json

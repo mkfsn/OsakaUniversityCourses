@@ -72,6 +72,12 @@ class Course(db.Model):
         instructor = self._get_distinct("Instructor", text)
         return code + name + name_english + instructor
 
+    @classmethod
+    def years(self, attr):
+        query = db.session.query(self.__getattribute__(self, "Year")) \
+                  .distinct().all()
+        return [c.__getattribute__("Year") for c in query]
+
 
 class Time(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
