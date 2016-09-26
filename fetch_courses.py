@@ -21,12 +21,12 @@ db.session.commit()
 
 
 """
-Extract the day and period from @content.
-- @content(str): Examples are as following
-        * 水 2限
-        * 水 5限,6限
-        * Wednesday, Period 2
-        * Wednesday, Period 5,Period 6
+Extract the period of day from @content. The day should not be multiple.
+- @content(string): Examples are as following
+    * 水 2限
+    * 水 5限,6限
+    * Wednesday, Period 2
+    * Wednesday, Period 5,Period 6
 """
 def extract_day_period(content):
     day_of_week = {
@@ -67,12 +67,20 @@ def extract_day_period(content):
         return [(-1, -1)]
 
 
+"""
+Decode both the day and peiod of course in Japanese and English. Note that the
+day could be multiple.
+- @jp(string): Examples are as following
+    * 水 2限　木 2限
+    * 水 5限,6限
+- @en(string): Examples are as following
+    * Wednesday, Period 2　Thursday, Period 2
+    * Wednesday, Period 5,Period 6
+"""
 def decode_day_period(jp, en):
 
     # If the time of course are in different days
     if jp.find('　') != -1 and en.find('　') != -1:
-        # @jp: 水 2限　木 2限
-        # @en: Wednesday, Period 2　Thursday, Period 2
         jp_list, en_list = [jp.split('　'), en.split('　')]
         if len(jp_list) == len(en_list):
             day_period = []
@@ -83,8 +91,6 @@ def decode_day_period(jp, en):
     # If the time of course in one day has one or more period
     elif (len(jp) == 8 and len(en) >= 16 and len(en) <= 19) or \
          (jp.count(',') > 0 and en.count(',') > 1):
-        # @jp: 水 5限,6限
-        # @en: Wednesday, Period 5,Period 6
         t = [extract_day_period(jp), extract_day_period(en)]
         if t[0] == t[1]:
             return t[0]
