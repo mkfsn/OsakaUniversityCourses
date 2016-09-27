@@ -7,6 +7,7 @@ __author__ = 'mkfsn'
 from pyquery import PyQuery as pq
 import requests
 import ConfigParser
+import sys
 import time
 import json
 import re
@@ -18,6 +19,29 @@ config = ConfigParser.ConfigParser()
 config.read('defaults.cfg')
 db.create_all()
 db.session.commit()
+
+
+# Print iterations progress
+def printProgress(iteration, total, prefix='Progress:',
+                  suffix='Complete', decimals=1, barLength=100):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        barLength   - Optional  : character length of bar (Int)
+    """
+    formatStr       = "{0:." + str(decimals) + "f}"
+    percents        = formatStr.format(100 * (iteration / float(total)))
+    filledLength    = int(round(barLength * iteration / float(total)))
+    bar             = '█' * filledLength + '-' * (barLength - filledLength)
+    sys.stdout.write('\r%s |%s| %s%s %s' % (prefix, bar, percents, '%', suffix)),
+    if iteration == total:
+        sys.stdout.write('\n')
+    sys.stdout.flush()
 
 
 """
@@ -137,6 +161,11 @@ def dump_syllabus(headers, payload, department_list, db):
     headers['Referer'] = 'https://koan.osaka-u.ac.jp/syllabus_ex/campus'
     payload['func'] = 'function.syllabus.ex.refer.sogo.search'
 
+    # Initial call to print 0% progress
+    progress_i = 0
+    progress_l = 1 + 1 + 1 + 1 + 43 + 1 + 1 + 1
+    printProgress(progress_i, progress_l, prefix="Fetching:")
+
     for category, affiliation in department_list.items():
         for a in affiliation:
 
@@ -165,8 +194,12 @@ def dump_syllabus(headers, payload, department_list, db):
                     db.session.add(t)
             db.session.commit()
 
+            # Display progress
+            progress_i += 1
+            printProgress(progress_i, progress_l, prefix="Fetching:")
+
             # Don't fetch too fast
-            time.sleep(2)
+            time.sleep(1)
 
 
 if __name__ == '__main__':
