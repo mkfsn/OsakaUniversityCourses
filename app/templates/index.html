@@ -114,14 +114,6 @@ $("#search-course").on('submit', function(e){
       $content = $("div#lecture > div.tab-content");
   var queryStr = $.trim($(".search input#coursename").val());
   
-  // Confirm if sure to continue.
-  if (queryStr == "") {
-    res = confirm("You are asking all of records (about 8000)" +
-                  ", and may cause your browser crash, continue?");
-    if (res !== true)
-      return false;
-  }
-
   $.ajax({
     url: '/course',
     method: 'GET',
@@ -138,6 +130,13 @@ $("#search-course").on('submit', function(e){
       console.log(data);
       $tabs.html('');
       $content.html('');
+
+      if (data.counts > 3000) {
+        res = confirm("You are asking too many records (" + data.counts + ")" +
+                      ", and may cause your browser crash, continue?");
+        if (res !== true)
+          return false;
+      }
 
       var courses = {};
       $.each(data.courses, function(i, v) {

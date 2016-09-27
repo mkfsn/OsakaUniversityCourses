@@ -169,8 +169,6 @@ def course():
 
     courses = Course.query.join(Time).filter(conditions).all()
 
-    if len(courses) > 5000:
-        return jsonify(counts=len(courses), courses=[])
     return jsonify(counts=len(courses), courses=[c.to_dict() for c in courses])
 
 
