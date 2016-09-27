@@ -18,6 +18,7 @@ class Course(db.Model):
     Instructor = db.Column(db.String)
     DayAndPeriod = db.Column(db.String)
     Year = db.Column(db.Integer)
+    Semester = db.Column(db.String)
     Category = db.Column(db.String)
     AffiliationCode = db.Column(db.String)
     ClassTime = db.relationship('Time', backref='Course', lazy='dynamic')

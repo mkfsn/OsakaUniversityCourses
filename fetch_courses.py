@@ -117,6 +117,7 @@ def fetch(link, headers={}, payload={}, category='', code=''):
             'Instructor':       pq(td[2]).text(),
             'DayAndPeriod':     pq(td[3]).text(),
             'Year':             int(payload['nendo']),
+            'Semester':         payload['kaiko'],
             'Category':         category,
             'AffiliationCode':  code
         }
@@ -139,13 +140,16 @@ def dump_syllabus(headers, payload, department_list, db):
     for category, affiliation in department_list.items():
         for a in affiliation:
 
-            # Show status of fetching
-            print a['Name']
-
             payload['category'] = category
             payload['s_j_s_cd'] = a['Code']
-            courses = fetch(link, headers=headers, payload=payload,
-                            category=a['Name'], code=a['Code'])
+
+            # Semester
+            courses = []
+            for s in [1, 2, 3, 4, 5]:
+                payload['kaiko'] = str(s)
+                courses += fetch(link, headers=headers, payload=payload,
+                                 category=a['Name'], code=a['Code'])
+
             for c in courses:
                 if db.session.query(Course) \
                              .filter_by(ClassCode=c.ClassCode, Year=c.Year) \
