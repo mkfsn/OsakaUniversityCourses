@@ -31,27 +31,27 @@ def printProgress(iteration, total, prefix='Progress:',
         total       - Required  : total iterations (Int)
         prefix      - Optional  : prefix string (Str)
         suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        decimals    - Optional  : positive number of decimals in percent
+                                  complete (Int)
         barLength   - Optional  : character length of bar (Int)
     """
-    formatStr       = "{0:." + str(decimals) + "f}"
-    percents        = formatStr.format(100 * (iteration / float(total)))
-    filledLength    = int(round(barLength * iteration / float(total)))
-    bar             = '█' * filledLength + '-' * (barLength - filledLength)
-    sys.stdout.write('\r%s |%s| %s%s %s' % (prefix, bar, percents, '%', suffix)),
+    formatStr = "{0:." + str(decimals) + "f}"
+    percents = formatStr.format(100 * (iteration / float(total)))
+    filledLength = int(round(barLength * iteration / float(total)))
+    bar = '█' * filledLength + '-' * (barLength - filledLength)
+    sys.stdout.write('\r%s |%s| %s%s %s' % (prefix, bar, percents,
+                                            '%', suffix)),
     if iteration == total:
         sys.stdout.write('\n')
     sys.stdout.flush()
 
 
-"""
-Extract the period of day from @content. The day should not be multiple.
-- @content(string): Examples are as following
-    * 水 2限
-    * 水 5限,6限
-    * Wednesday, Period 2
-    * Wednesday, Period 5,Period 6
-"""
+# Extract the period of day from @content. The day should not be multiple.
+# - @content(string): Examples are as following
+#     * 水 2限
+#     * 水 5限,6限
+#     * Wednesday, Period 2
+#     * Wednesday, Period 5,Period 6
 def extract_day_period(content):
     day_of_week = {
         'jp': ['月', '火', '水', '木', '金', '土', '日'],
@@ -91,16 +91,14 @@ def extract_day_period(content):
         return [(-1, -1)]
 
 
-"""
-Decode both the day and peiod of course in Japanese and English. Note that the
-day could be multiple.
-- @jp(string): Examples are as following
-    * 水 2限　木 2限
-    * 水 5限,6限
-- @en(string): Examples are as following
-    * Wednesday, Period 2　Thursday, Period 2
-    * Wednesday, Period 5,Period 6
-"""
+# Decode both the day and peiod of course in Japanese and English.
+# Note that the day could be multiple.
+# - @jp(string): Examples are as following
+#     * 水 2限　木 2限
+#     * 水 5限,6限
+# - @en(string): Examples are as following
+#     * Wednesday, Period 2　Thursday, Period 2
+#     * Wednesday, Period 5,Period 6
 def decode_day_period(jp, en):
 
     # If the time of course are in different days
