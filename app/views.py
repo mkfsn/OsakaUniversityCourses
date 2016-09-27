@@ -33,7 +33,7 @@ def index():
 @app.route('/autocomplete/course', methods=['GET'])
 def autocomplete_course():
     query = request.args.get('query').strip().rstrip()
-    return jsonify(result=Course.distinct(query))
+    return jsonify(result=Course.distinct(query)[:20])
 
 
 @app.route('/ajax/years', methods=['GET'])
@@ -168,7 +168,10 @@ def course():
         conditions &= ~(Course.ClassTime.any(Time.Period == int(s)))
 
     courses = Course.query.join(Time).filter(conditions).all()
-    return jsonify(courses=[c.to_dict() for c in courses])
+
+    if len(courses) > 5000:
+        return jsonify(counts=len(courses), courses=[])
+    return jsonify(counts=len(courses), courses=[c.to_dict() for c in courses])
 
 
 @app.route("/autocomplete/courses/beta", methods=['GET'])
