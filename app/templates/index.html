@@ -14,18 +14,6 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-search-collapse">
-      <form class="navbar-form navbar-left" role="search" id="search-course">
-        <div class="form-group" style="display:inline;">
-          <div class="input-group search" style="display:table;">
-            <input type="text" class="form-control" placeholder="{{ _("Search") }}" id="coursename">
-            <span class="input-group-btn" style="display:table-cell;width:7%;">
-              <button type="submit" class="btn btn-primary">
-                <span class="glyphicon glyphicon-search"></span>
-              </button>
-            </span>
-          </div>
-        </div>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ _("Link") }} <span class="caret"></span></a>
@@ -39,6 +27,46 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<div id="query" class="col-lg-12 col-md-12 col-sm-12" style="padding-top:15px">
+  <form class="form-horizontal" role="search" id="search-course">
+    <div class="form-group">
+      <label for="coursename" class="col-sm-2 control-label">Search</label>
+      <div class="search col-sm-10 container-fluid">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="{{ _("Search") }}" id="coursename">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary" style="display: inline-block">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="filterby" class="col-sm-2 control-label">Filter By</label>
+      <div class="filter col-sm-10" style="padding-left:0">
+        <div class="col-sm-6">
+          <select class="form-control">
+            {% for y in years %}
+            <option value="{{ y }}">{{ y }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-sm-6" style="padding-right:0">
+          <select class="form-control">
+            <option value=""></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
 <div id="lecture">
   <!-- Nav tabs -->
@@ -128,7 +156,6 @@ var render_course = function($dom, data) {
     $("td.DayAndPeriod", $tr).html(extract_day_period(v['DayAndPeriod']));
     $("tbody", $table).append($tr);
   });
-  console.log($table);
   $dom.html($table);
 }
 
@@ -151,7 +178,6 @@ $("#search-course").on('submit', function(e){
       $content.css('opacity', '1');
     },
     success: function(data) {
-      console.log(data);
       $tabs.html('');
       $content.html('');
 
@@ -195,7 +221,6 @@ $("div.search input#coursename").autocomplete({
     jQuery.get("/autocomplete/course", {
       query: request.term
     }, function (data) {
-      console.log(data);
       response($.map(data.result, function(v){ return v; }));
     });
   },
