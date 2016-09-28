@@ -50,6 +50,7 @@ class Course(db.Model):
             'Instructor': self.Instructor,
             'DayAndPeriod': self.DayAndPeriod,
             'Year': self.Year,
+            'Semester': self.Semester,
             'Category': self.Category,
             'AffiliationCode': self.AffiliationCode
         }
