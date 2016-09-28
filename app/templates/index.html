@@ -87,6 +87,30 @@ Array.prototype.unique = function() {
     return a;
 }
 
+function extract_day_period(text) {
+  [jp, en] = text.split("／");
+  [jp_list, en_list] = [[], []];
+  [tag, gat] = ['<span class="label label-success">', '</span>'];
+
+  $.each(jp.split("　"), function(k, v){
+    if (v === "他")
+      jp_list.push(tag + v + gat);
+    $.each(v.match(/\d+/g), function(key, value) {
+      jp_list.push(tag + v[0] + value + gat);
+    });
+  });
+
+  $.each(en.split("　"), function(k, v){
+    if (v === "Other")
+      en_list.push(tag + v + gat);
+    $.each(v.match(/\d+/g), function(key, value) {
+      en_list.push(tag + v.substring(0, 3) + "." + value + gat);
+    });
+  });
+
+  return jp_list.join(' ') + "<br>" + en_list.join(' ');
+}
+
 var render_course = function($dom, data) {
   var $table = $("div#template div.nav-tab-content-table table").clone();
   $.each(data, function(i, v) {
@@ -101,7 +125,7 @@ var render_course = function($dom, data) {
     $("td.ClassCode", $tr).text(v['ClassCode']);
     $("td.Name", $tr).html(v['Name'] + "<br>" + v['Name_English']);
     $("td.Instructor", $tr).html(v['Instructor'].replace(/／/g, '<br>'));
-    $("td.DayAndPeriod", $tr).html(v['DayAndPeriod'].replace(/／/g, '<br>'));
+    $("td.DayAndPeriod", $tr).html(extract_day_period(v['DayAndPeriod']));
     $("tbody", $table).append($tr);
   });
   console.log($table);
