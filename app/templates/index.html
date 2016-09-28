@@ -47,14 +47,14 @@
       <label for="filterby" class="col-sm-2 control-label">Filter By</label>
       <div class="filter col-sm-10" style="padding-left:0">
         <div class="col-sm-6">
-          <select class="form-control">
+          <select class="form-control" id="filterby_year">
             {% for y in years %}
             <option value="{{ y }}">{{ y }}</option>
             {% endfor %}
           </select>
         </div>
         <div class="col-sm-6" style="padding-right:0">
-          <select class="form-control">
+          <select class="form-control" id="filterby_semester">
             <option value=""></option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -141,8 +141,14 @@ function extract_day_period(text) {
 
 var render_course = function($dom, data) {
   var $table = $("div#template div.nav-tab-content-table table").clone();
+  var filter_semester = $("#filterby_semester").val();
   $.each(data, function(i, v) {
     var $tr = $table.find("tfoot tr").clone();
+    $tr.data("year", v['Year']);
+    $tr.data("semester", v['Semester']);
+
+    if (filter_semester != "" && $tr.data("semester") != filter_semester)
+      $tr.addClass("hide");
 
     // var href = v['InfoURL'].replace(/syllabus/g, "syllabus.ex")
     //                        .replace("koan", "syllabus_ex")
@@ -188,7 +194,9 @@ $("#search-course").on('submit', function(e){
           return false;
       }
 
-      var courses = {};
+      var courses = {},
+          filter_semester = $("#filterby_semester").val(),
+          total = 0;
       $.each(data.courses, function(i, v) {
         if (!(v['Category'] in courses))
           courses[v['Category']] = [];
@@ -198,6 +206,14 @@ $("#search-course").on('submit', function(e){
       $.each(Object.keys(courses), function(i, v) {
         var name = v.replace(/[(]/g, '（').replace(/[)]/g, '）');
         var count = courses[v].length;
+        if (filter_semester != "") {
+          $.each(courses[v], function(key, value) {
+            if (filter_semester != value['Semester'])
+              count--;
+          });
+        }
+        total += count;
+
         var $a = $('<a href="#' + name + '" aria-controls="' + name + '" role="tab" data-toggle="tab">' + name + ' (' + count + ')' + '</a>'),
             $li = $('<li role="presentation"></li>').append($a),
             $div = $('<div role="tabpanel" class="tab-pane" id="' + name + '"></div>');
@@ -209,7 +225,7 @@ $("#search-course").on('submit', function(e){
       var $div = $('<div role="tabpanel" class="tab-pane in active" id="all"></div>');
       render_course($div, data.courses);
 
-      $tabs.prepend('<li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">{{ _("All") }} ('+data.courses.length+')</a></li>');
+      $tabs.prepend('<li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">{{ _("All") }} ('+total+')</a></li>');
       $content.prepend($div);
       $("a#all", $tabs).tab('');
     }
@@ -225,6 +241,34 @@ $("div.search input#coursename").autocomplete({
     });
   },
   minLength: 1
+});
+
+$("#filterby_semester").on("change", function(e){
+  var value = $(this).val();
+  switch(value) {
+    case '':
+      $("#lecture table tbody tr").removeClass("hide");
+      break;
+    case '1': case '2': case '3': case '4': case '5':
+      $("#lecture table tbody tr").each(function(k, v){
+        if ($(v).data("semester") == value ) {
+          $(v).removeClass("hide");
+        } else {
+          $(v).addClass("hide");
+        }
+      });
+      break;
+  }
+  $("#lecture ul.nav-pills li > a").each(function(v){
+    var id = '#' + $(this).prop("href").split("#")[1],
+        selector = "div" + id + ".tab-pane > table tbody tr",
+        count = 0;
+    $(selector).each(function(v){
+      if (!$(this).hasClass("hide"))
+        count++;
+    });
+    $(this).text($(this).text().replace(/\d+/, count));
+  });
 });
 </script>
 
