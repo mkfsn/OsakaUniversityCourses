@@ -27,7 +27,7 @@ def get_locale():
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", years=Course.years())
 
 
 @app.route('/autocomplete/course', methods=['GET'])
