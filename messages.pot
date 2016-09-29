@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 00:59+0900\n"
+"POT-Creation-Date: 2016-09-29 09:36+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,31 +21,63 @@ msgstr ""
 msgid "Osaka University Course Searching Engine"
 msgstr ""
 
-#: app/templates/index.html:20
-msgid "Search"
-msgstr ""
-
-#: app/templates/index.html:31
+#: app/templates/index.html:19
 msgid "Link"
 msgstr ""
 
+#: app/templates/index.html:34
+msgid "Search"
+msgstr ""
+
+#: app/templates/index.html:37
+msgid "Search for Course ID, Course Name, Instructor"
+msgstr ""
+
+#: app/templates/index.html:47
+msgid "Filter By"
+msgstr ""
+
 #: app/templates/index.html:58
-msgid "Class Code"
+msgid "All semesters"
 msgstr ""
 
 #: app/templates/index.html:59
-msgid "Name"
+msgid "First semester"
 msgstr ""
 
 #: app/templates/index.html:60
-msgid "Instructor"
+msgid "Second semester"
 msgstr ""
 
 #: app/templates/index.html:61
+msgid "Full year"
+msgstr ""
+
+#: app/templates/index.html:62
+msgid "Intensive"
+msgstr ""
+
+#: app/templates/index.html:63
+msgid "Continue to the next academic year"
+msgstr ""
+
+#: app/templates/index.html:86
+msgid "Class Code"
+msgstr ""
+
+#: app/templates/index.html:87
+msgid "Name"
+msgstr ""
+
+#: app/templates/index.html:88
+msgid "Instructor"
+msgstr ""
+
+#: app/templates/index.html:89
 msgid "Day and Period"
 msgstr ""
 
-#: app/templates/index.html:145
+#: app/templates/index.html:228
 msgid "All"
 msgstr ""
 

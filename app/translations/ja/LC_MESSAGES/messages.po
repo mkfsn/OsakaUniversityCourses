@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 00:59+0900\n"
+"POT-Creation-Date: 2016-09-29 09:36+0900\n"
 "PO-Revision-Date: 2016-04-14 20:09+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -21,31 +21,63 @@ msgstr ""
 msgid "Osaka University Course Searching Engine"
 msgstr "阪大シラバス検索システム"
 
-#: app/templates/index.html:20
-msgid "Search"
-msgstr "検索"
-
-#: app/templates/index.html:31
+#: app/templates/index.html:19
 msgid "Link"
 msgstr "リンク"
 
+#: app/templates/index.html:34
+msgid "Search"
+msgstr "検索"
+
+#: app/templates/index.html:37
+msgid "Search for Course ID, Course Name, Instructor"
+msgstr "時間割コード、開講科目名、教員名を検査"
+
+#: app/templates/index.html:47
+msgid "Filter By"
+msgstr "フィルタ"
+
 #: app/templates/index.html:58
+msgid "All semesters"
+msgstr "すべての開講区分"
+
+#: app/templates/index.html:59
+msgid "First semester"
+msgstr "一学期"
+
+#: app/templates/index.html:60
+msgid "Second semester"
+msgstr "二学期"
+
+#: app/templates/index.html:61
+msgid "Full year"
+msgstr "通年"
+
+#: app/templates/index.html:62
+msgid "Intensive"
+msgstr "集中"
+
+#: app/templates/index.html:63
+msgid "Continue to the next academic year"
+msgstr "年度跨り"
+
+#: app/templates/index.html:86
 msgid "Class Code"
 msgstr "時間割コード"
 
-#: app/templates/index.html:59
+#: app/templates/index.html:87
 msgid "Name"
 msgstr "開講科目名"
 
-#: app/templates/index.html:60
+#: app/templates/index.html:88
 msgid "Instructor"
 msgstr "担当教員"
 
-#: app/templates/index.html:61
+#: app/templates/index.html:89
 msgid "Day and Period"
 msgstr "曜日・時間"
 
-#: app/templates/index.html:145
+#: app/templates/index.html:228
 msgid "All"
 msgstr "全部"
 

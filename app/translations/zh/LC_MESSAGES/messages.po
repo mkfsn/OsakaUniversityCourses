@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 00:59+0900\n"
+"POT-Creation-Date: 2016-09-29 09:36+0900\n"
 "PO-Revision-Date: 2016-04-14 20:09+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: zh <LL@li.org>\n"
@@ -21,31 +21,63 @@ msgstr ""
 msgid "Osaka University Course Searching Engine"
 msgstr "大阪大學課程搜尋引擎"
 
-#: app/templates/index.html:20
-msgid "Search"
-msgstr "搜尋"
-
-#: app/templates/index.html:31
+#: app/templates/index.html:19
 msgid "Link"
 msgstr "連結"
 
+#: app/templates/index.html:34
+msgid "Search"
+msgstr "搜尋"
+
+#: app/templates/index.html:37
+msgid "Search for Course ID, Course Name, Instructor"
+msgstr "搜尋課程代號、課程名稱、授課教師"
+
+#: app/templates/index.html:47
+msgid "Filter By"
+msgstr "過濾"
+
 #: app/templates/index.html:58
+msgid "All semesters"
+msgstr "全部"
+
+#: app/templates/index.html:59
+msgid "First semester"
+msgstr "第一學期"
+
+#: app/templates/index.html:60
+msgid "Second semester"
+msgstr "第二學期"
+
+#: app/templates/index.html:61
+msgid "Full year"
+msgstr "一學年"
+
+#: app/templates/index.html:62
+msgid "Intensive"
+msgstr "集中講義"
+
+#: app/templates/index.html:63
+msgid "Continue to the next academic year"
+msgstr "跨學年度"
+
+#: app/templates/index.html:86
 msgid "Class Code"
 msgstr "課程代號"
 
-#: app/templates/index.html:59
+#: app/templates/index.html:87
 msgid "Name"
 msgstr "課程名稱"
 
-#: app/templates/index.html:60
+#: app/templates/index.html:88
 msgid "Instructor"
 msgstr "授課教師"
 
-#: app/templates/index.html:61
+#: app/templates/index.html:89
 msgid "Day and Period"
 msgstr "課程時間"
 
-#: app/templates/index.html:145
+#: app/templates/index.html:228
 msgid "All"
 msgstr "全部"
 
