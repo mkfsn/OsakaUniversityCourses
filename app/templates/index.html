@@ -31,10 +31,10 @@
 <div id="query" class="col-lg-12 col-md-12 col-sm-12" style="padding-top:15px">
   <form class="form-horizontal" role="search" id="search-course">
     <div class="form-group">
-      <label for="coursename" class="col-sm-2 control-label">Search</label>
+      <label for="coursename" class="col-sm-2 control-label">{{ _("Search") }}</label>
       <div class="search col-sm-10 container-fluid">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="{{ _("Search") }}" id="coursename">
+          <input type="text" class="form-control" placeholder="{{ _("Search for Course ID, Course Name, Instructor") }}" id="coursename">
           <span class="input-group-btn">
             <button type="submit" class="btn btn-primary" style="display: inline-block">
               <span class="glyphicon glyphicon-search"></span>
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="filterby" class="col-sm-2 control-label">Filter By</label>
+      <label for="filterby" class="col-sm-2 control-label">{{ _("Filter By") }}</label>
       <div class="filter col-sm-10" style="padding-left:0">
         <div class="col-sm-6">
           <select class="form-control" id="filterby_year">
@@ -55,12 +55,12 @@
         </div>
         <div class="col-sm-6" style="padding-right:0">
           <select class="form-control" id="filterby_semester">
-            <option value=""></option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+            <option value="">{{ _("All semesters") }}</option>
+            <option value="1">{{ _("First semester") }}</option>
+            <option value="2">{{ _("Second semester") }}</option>
+            <option value="3">{{ _("Full year") }}</option>
+            <option value="4">{{ _("Intensive") }}</option>
+            <option value="5">{{ _("Continue to the next academic year") }}</option>
           </select>
         </div>
       </div>
